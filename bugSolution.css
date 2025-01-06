@@ -1,0 +1,23 @@
+The problem stems from using `calc(100% - 10px)` within a nested element before defining the parent's width.  If the parent's width is not explicitly set, the percentage calculation will default to 0, making the subtraction ineffective. 
+
+**Solution:** Explicitly set the parent element's width.  Alternatively, using only pixel values or percentages (without combining them in `calc()`) within the nested element can avoid this issue.
+
+```css
+/* bug.css */
+.parent {
+  /* Missing explicit width declaration */
+}
+
+.child {
+  width: calc(100% - 10px);
+}
+
+/* bugSolution.css */
+.parent {
+  width: 500px; /* Explicit width declaration */
+}
+
+.child {
+  width: calc(100% - 10px);
+}
+```
